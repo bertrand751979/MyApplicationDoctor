@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#131D55"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="119dp"
+            android:layout_marginLeft="110dp"
+            android:textColor="@color/white"
+            android:textSize="27sp"
+            android:text="DOCTOR"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="149dp"
+            android:layout_marginLeft="190dp"
+            android:textColor="#42E348"
+            android:textStyle="bold"
+            android:textSize="27sp"
+            android:text="FINDER"/>
+    </RelativeLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_text_input_layout"
+        android:textColorHint="@color/design_default_color_on_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/register_page_edit_name_patient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="40dp"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:backgroundTint="#131D55"
+            android:layout_marginRight="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="Nom et prénom" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userLogin_text_input_layout"
+        android:layout_width="match_parent"
+        android:textColorHint="@color/design_default_color_on_primary"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/register_page_edit_login_patient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxLines="1"
+            android:layout_marginLeft="40dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#131D55"
+            android:layout_marginRight="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="Login" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userpassword_text_input_layout"
+        android:textColorHint="@color/design_default_color_on_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/register_page_edit_password_patient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#131D55"
+            android:layout_marginRight="40dp"
+            android:maxLines="1"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="Mot de Passe" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="80dp"
+       android:gravity="center"
+       android:orientation="horizontal">
+
+       <RadioButton
+           android:id="@+id/radioButton1"
+           android:layout_width="105dp"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+           android:text="Docteur"
+           android:textColor="@color/white"
+           android:layout_marginBottom="20dp"
+           android:textSize="14sp" />
+
+       <RadioButton
+           android:id="@+id/radioButton2"
+           android:layout_width="105dp"
+           android:layout_height="wrap_content"
+           android:textColor="@color/white"
+           android:layout_marginBottom="20dp"
+           android:layout_gravity="center"
+           android:text="Patient"
+           android:layout_marginTop="20dp"
+           android:textSize="14sp" />
+
+   </LinearLayout>
+    <Button
+        android:layout_marginTop="50dp"
+        android:id="@+id/login_page_btn_connected"
+        android:layout_width="180dp"
+        android:layout_gravity="center"
+        android:layout_height="60dp"
+        android:textSize="11sp"
+        android:text="PLUS D'INFORMATION..."
+        android:backgroundTint="#42E348"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/registerConnectTxt"
+            android:layout_width="194dp"
+            android:layout_height="wrap_content"
+            android:text="Déjà enregistré, connecté vous?  "
+            android:textSize="11sp"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

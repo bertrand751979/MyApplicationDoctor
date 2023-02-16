@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#131D55"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_person"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/raw_choice_dr_name"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textColor="#52F622"
+            android:text="hgjhqdgjhgdhhhk"/>
+
+            <TextView
+                android:id="@+id/raw_choice_dr_skill"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_marginTop="10dp"
+                android:textStyle="italic"
+                android:textColor="#52F622"
+                android:text="hgjhqdgjhgdhhhk"/>
+        </LinearLayout>
+    </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/raw_choice_dr_circle_phone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_circle"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_phone" />
+
+            <ImageView
+                android:id="@+id/raw_choice_dr_circle_place"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="70dp"
+                android:src="@drawable/ic_circle"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="90dp"
+                android:src="@drawable/ic_place" />
+
+            <ImageView
+                android:id="@+id/raw_choice_dr_circle_three_points"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="140dp"
+                android:src="@drawable/ic_circle"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="160dp"
+                android:src="@drawable/ic_3_points" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

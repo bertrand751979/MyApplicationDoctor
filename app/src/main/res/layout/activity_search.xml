@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#131D55"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearEmergencyArrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_arrow_left"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RE HERCHE "
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#67DC47"/>
+    </LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_height="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:strokeColor="#11FD15"
+        android:backgroundTint="#131D55"
+        android:layout_marginTop="40dp"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="44dp">
+
+        <Spinner
+            android:id="@+id/spiner_search_dr_skills"
+            android:layout_height="40dp"
+            android:layout_width="160dp"
+            android:textColorHint="@color/design_default_color_on_primary"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <EditText
+        android:id="@+id/search_dr_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nom Complet"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textColorHint="@color/white"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:layout_height="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            app:strokeColor="#11FD15"
+            android:backgroundTint="#131D55"
+            android:layout_marginTop="40dp"
+            app:strokeWidth="1dp"
+            app:cardCornerRadius="44dp">
+
+            <Spinner
+                android:id="@+id/spiner_search_city"
+                android:layout_height="40dp"
+                android:layout_width="160dp"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="150dp"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:layout_height="40dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="40dp"
+            app:strokeColor="#11FD15"
+            android:backgroundTint="#131D55"
+            android:layout_marginTop="40dp"
+            app:strokeWidth="1dp"
+            app:cardCornerRadius="44dp">
+
+            <Spinner
+                android:id="@+id/spiner_search_county"
+                android:layout_height="40dp"
+                android:layout_width="160dp"
+                android:textColorHint="@color/design_default_color_on_primary"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="40dp"
+        android:text="SEARCH"
+        android:backgroundTint="#11FD15"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="REMEMBER"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="#11FD15"
+            android:gravity="center"
+            android:text="MY SETTINGS"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#C3C3C3"
+        android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEmergency"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"/>
+    </LinearLayout>
+</LinearLayout>
