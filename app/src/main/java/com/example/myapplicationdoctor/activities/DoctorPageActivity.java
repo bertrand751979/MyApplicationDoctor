@@ -141,11 +141,10 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
                 @Override
                 public void goToListDoctorsBySkills(SkillDoctor skillDoctor) {
                     for(SkillDoctor skillDoctor1 : RepositoryApplication.getInstance().myListSkillsDoctor){
-                        if(skillDoctor1.getSkill().equalsIgnoreCase("Allergologue")){
-                            Intent intent = new Intent(DoctorPageActivity.this,AllergologueActivity.class);
-                            startActivity(intent);
+                            if(skillDoctor1.getSkill().equalsIgnoreCase("Allergologue")){
+                                Intent intent = new Intent(DoctorPageActivity.this,AllergologueActivity.class);
+                                startActivity(intent);
                         }
-
                     }
                 }
             };

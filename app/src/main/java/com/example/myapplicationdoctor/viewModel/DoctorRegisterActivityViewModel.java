@@ -14,14 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorRegisterActivityViewModel extends ViewModel {
-    private MutableLiveData<List<UserDoctor>> listMutableDr = new MutableLiveData<>();
-    public LiveData<List<UserDoctor>> liveDataDrRegister = listMutableDr;
-
-
+    public LiveData<List<UserDoctor>> getLiveDataDoctor(Context context){
+        return RepositoryApplication.getInstance().getUserDoctorList(context);
+    }
 
     public void addToDoctorList(UserDoctor userDoctor, Context context){
         RepositoryApplication.getInstance().addUserDoctor(userDoctor,context);
     }
+
+
 
 
 

@@ -1,6 +1,6 @@
 package com.example.myapplicationdoctor.activities;
 
-import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTEUR_KEY;
+import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -28,7 +28,7 @@ public class DrRegistryDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_dr_register);
-        userDoctor =(UserDoctor)getIntent().getSerializableExtra(USERDOCTEUR_KEY);
+        userDoctor =(UserDoctor)getIntent().getSerializableExtra(USERDOCTOR_KEY);
         detailOfficeName = findViewById(R.id.desc_office_name);
         detailSkill = findViewById(R.id.desc_skill);
         detailOpen = findViewById(R.id.desc_office_open);

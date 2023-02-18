@@ -1,7 +1,6 @@
 package com.example.myapplicationdoctor.activities;
 
-import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTEUR_KEY;
-import static com.example.myapplicationdoctor.activities.MainActivity.USERPATIENT_KEY;
+import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -36,7 +34,6 @@ import com.example.myapplicationdoctor.model.City;
 import com.example.myapplicationdoctor.model.Root;
 import com.example.myapplicationdoctor.model.TestSkill;
 import com.example.myapplicationdoctor.model.UserDoctor;
-import com.example.myapplicationdoctor.model.UserPatient;
 import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 import com.example.myapplicationdoctor.viewModel.DoctorRegisterActivityViewModel;
 
@@ -239,11 +236,19 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 userDoctor.setDoctorCloseHolidays(endHolidays.getText().toString());
                 userDoctor.setDoctorOpenOffice(startWorkHour.getText().toString());
                 userDoctor.setDoctorCloseOffice(leaveWorkHour.getText().toString());
-                RepositoryApplication.getInstance().myUserDoctorList.add(userDoctor);
-                doctorRegisterActivityViewModel.addToDoctorList(userDoctor,DoctorRegisterActivity.this);
+                RepositoryApplication.getInstance().addUserDoctor(userDoctor,DoctorRegisterActivity.this);
+
                 Intent intent = new Intent(DoctorRegisterActivity.this,LoginPageActivity.class);
-                intent.putExtra(USERDOCTEUR_KEY,userDoctor);
+                intent.putExtra(USERDOCTOR_KEY,userDoctor);
                 startActivity(intent);
+            }
+        });
+        doctorRegisterActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+            @Override
+            public void onChanged(List<UserDoctor> userDoctors) {
+                RepositoryApplication.getInstance().myUserDoctorList = (ArrayList<UserDoctor>) userDoctors;
+                Toast.makeText(DoctorRegisterActivity.this, "Long"+RepositoryApplication.getInstance().myUserDoctorList.size(), Toast.LENGTH_SHORT).show();
+
             }
         });
 

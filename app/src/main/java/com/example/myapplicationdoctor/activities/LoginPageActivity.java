@@ -1,6 +1,6 @@
 package com.example.myapplicationdoctor.activities;
 
-import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTEUR_KEY;
+import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
 import static com.example.myapplicationdoctor.activities.MainActivity.USERPATIENT_KEY;
 
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -128,7 +127,7 @@ public class LoginPageActivity extends AppCompatActivity {
         }
         if (resultat == true) {
             Intent intent = new Intent(LoginPageActivity.this, DrRegistryDetailActivity.class);
-            intent.putExtra(USERDOCTEUR_KEY, loginUserDoctor);
+            intent.putExtra(USERDOCTOR_KEY, loginUserDoctor);
             Log.d("log", loginUserDoctor.getDoctorLogin());
             startActivity(intent);
             Toast.makeText(LoginPageActivity.this,"Dr connecté",Toast.LENGTH_SHORT).show();

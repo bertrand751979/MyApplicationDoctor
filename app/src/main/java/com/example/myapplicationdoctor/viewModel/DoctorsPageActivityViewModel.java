@@ -13,6 +13,9 @@ import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 import java.util.List;
 
 public class DoctorsPageActivityViewModel extends ViewModel {
+    public LiveData<List<UserDoctor>> getLiveDataDoctor(Context context){
+        return RepositoryApplication.getInstance().getUserDoctorList(context);
+    }
 
 
 

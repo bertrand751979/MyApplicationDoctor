@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 @Entity
 public class UserDoctor implements Serializable {
@@ -35,7 +36,6 @@ public class UserDoctor implements Serializable {
     @ColumnInfo(name="doctorCloseHolidays")
     private String doctorCloseHolidays;
 
-
     public UserDoctor(Integer id, String doctorLogin, String doctorPassword, String doctorName, String doctorLocation, String doctorPhoneNumber, String doctorSkill, String doctorCity, String doctorDayWorked) {
         this.id = id;
         this.doctorLogin = doctorLogin;
@@ -53,6 +53,14 @@ public class UserDoctor implements Serializable {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getDoctorSkill() {
+        return doctorSkill;
+    }
+
+    public void setDoctorSkill(String doctorSkill) {
+        this.doctorSkill = doctorSkill;
     }
 
     public void setId(Integer id) {
@@ -81,14 +89,6 @@ public class UserDoctor implements Serializable {
 
     public void setDoctorPhoneNumber(String doctorPhoneNumber) {
         this.doctorPhoneNumber = doctorPhoneNumber;
-    }
-
-    public String getDoctorSkill() {
-        return doctorSkill;
-    }
-
-    public void setDoctorSkill(String doctorSkill) {
-        this.doctorSkill = doctorSkill;
     }
 
     public String getDoctorCity() {

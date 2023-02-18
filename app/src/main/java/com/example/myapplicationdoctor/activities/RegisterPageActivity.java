@@ -5,20 +5,27 @@ import static com.example.myapplicationdoctor.activities.MainActivity.USERPATIEN
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplicationdoctor.R;
 import com.example.myapplicationdoctor.model.UserPatient;
+import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 import com.example.myapplicationdoctor.viewModel.RegisterPageActivityViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterPageActivity extends AppCompatActivity {
     private RadioButton btnDoctor;
@@ -57,6 +64,7 @@ public class RegisterPageActivity extends AppCompatActivity {
                 userPatient.setUserPatientLogin(editLoginUserPatient.getText().toString());
                 userPatient.setUserPatientPassword(editPasswordUserPatient.getText().toString());
                 registerPageActivityViewModel.addToPatientList(userPatient,RegisterPageActivity.this);
+                Log.d("user", String.valueOf(RepositoryApplication.getInstance().myUserPatientList.size()));
                 Intent intent = new Intent(RegisterPageActivity.this,LoginPageActivity.class);
                 intent.putExtra(USERPATIENT_KEY,userPatient);
                 startActivity(intent);
@@ -76,5 +84,13 @@ public class RegisterPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+       registerPageActivityViewModel.getLiveDataUser(this).observe(this, new Observer<List<UserPatient>>() {
+           @Override
+           public void onChanged(List<UserPatient> userPatients) {
+            RepositoryApplication.getInstance().myUserPatientList = (ArrayList<UserPatient>) userPatients;
+               Toast.makeText(RegisterPageActivity.this, "Longueur"+RepositoryApplication.getInstance().myUserPatientList.size(), Toast.LENGTH_SHORT).show();
+           }
+       });
     }
 }

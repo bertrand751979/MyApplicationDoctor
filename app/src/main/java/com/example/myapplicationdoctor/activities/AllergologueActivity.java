@@ -1,5 +1,9 @@
 package com.example.myapplicationdoctor.activities;
 
+import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,7 +57,9 @@ public class AllergologueActivity extends AppCompatActivity {
         OnCirclePhoneClickedAction onCirclePhoneClickedAction = new OnCirclePhoneClickedAction() {
             @Override
             public void callDr(UserDoctor userDoctor) {
-                Toast.makeText(AllergologueActivity.this, "Phone", Toast.LENGTH_SHORT).show();
+                String callDr = userDoctor.getDoctorPhoneNumber();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", callDr, null));
+                startActivity(intent);
             }
         };
 
@@ -68,18 +74,28 @@ public class AllergologueActivity extends AppCompatActivity {
         OnCircleDetailsClickedAction onCircleDetailsClickedAction = new OnCircleDetailsClickedAction() {
             @Override
             public void goToDrDetails(UserDoctor userDoctor) {
-                Toast.makeText(AllergologueActivity.this, "Detail", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AllergologueActivity.this, DrRegistryDetailActivity.class);
+                intent.putExtra(USERDOCTOR_KEY,userDoctor);
+                startActivity(intent);
             }
         };
         allergoAdapter = new AllergologueAdapter(onCircleDetailsClickedAction, onCirclePhoneClickedAction, onCircleMapClickedAction);
         recyclerView.setAdapter(allergoAdapter);
-        allergologueActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
+       /* allergologueActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
+            @Override
+            public void onChanged(List<UserDoctor> userDoctors) {
+                allergoAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
+                RepositoryApplication.getInstance().listAllergo = (ArrayList<UserDoctor>) userDoctors;
+            }
+        });*/
+
+        allergologueActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
                 allergoAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
                 RepositoryApplication.getInstance().listAllergo = (ArrayList<UserDoctor>) userDoctors;
             }
         });
-        allergologueActivityViewModel.toPostAllergologueList();
+
     }
 }

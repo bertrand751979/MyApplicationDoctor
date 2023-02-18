@@ -77,19 +77,19 @@ public class AllergologueViewHolder extends RecyclerView.ViewHolder {
         circlePhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            }
-        });
-        circlePlace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                onCirclePhoneClickedAction.callDr(userDoctor);
             }
         });
         circleDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                onCircleDetailsClickedAction.goToDrDetails(userDoctor);
+            }
+        });
+        circlePlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCircleMapClickedAction.goToDrMapLocation(userDoctor);
             }
         });
     }
