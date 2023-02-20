@@ -1,11 +1,13 @@
 package com.example.myapplicationdoctor.activities;
 
+import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
 import static com.example.myapplicationdoctor.activities.MainActivity.USERPATIENT_KEY;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -63,6 +65,7 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors_page);
         userPatient = (UserPatient) getIntent().getSerializableExtra(USERPATIENT_KEY);
+        RepositoryApplication.getInstance().getMyUserDoctorList();
         sharedPreferences = getSharedPreferences(USERPATIENT_KEY, 0);
         boolean dialogShown = sharedPreferences.getBoolean("dialogShown", false);
         if (dialogShown != true) {
@@ -71,7 +74,6 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
             editor.putBoolean("dialogShown", true);
             editor.commit();
         }
-
 
             Toast.makeText(this, "" + userPatient.getUserPatientName(), Toast.LENGTH_SHORT).show();
             navHeaderName = findViewById(R.id.nav_header_name_id);
@@ -86,7 +88,6 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
                 @Override
                 public void onClick(View view) {
                     drawerLayout.open();
-
                 }
             });
 
@@ -103,7 +104,7 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
             SkillDoctor skillDoctor10 = new SkillDoctor("Ophtalmologue");
             SkillDoctor skillDoctor11 = new SkillDoctor("ORL");
             SkillDoctor skillDoctor12 = new SkillDoctor("Radiologue");
-            SkillDoctor skillDoctor15 = new SkillDoctor("");
+            //SkillDoctor skillDoctor15 = new SkillDoctor("");
             SkillDoctor skillDoctor13 = new SkillDoctor("Gynecologue");
             SkillDoctor skillDoctor14 = new SkillDoctor("Dermatologue");
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor1);
@@ -118,7 +119,7 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor10);
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor11);
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor12);
-            RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor15);
+           // RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor15);
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor13);
             RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor14);
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor1, this);
@@ -133,32 +134,106 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor10, this);
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor11, this);
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor12, this);
-            RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor15, this);
+            //RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor15, this);
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor13, this);
             RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor14, this);
 
             OnLayoutClickedAction onLayoutClickedAction = new OnLayoutClickedAction() {
                 @Override
                 public void goToListDoctorsBySkills(SkillDoctor skillDoctor) {
-                    for(SkillDoctor skillDoctor1 : RepositoryApplication.getInstance().myListSkillsDoctor){
+                    if (skillDoctor.getSkill() == "Allergologue") {
+                        for(UserDoctor userDoctor1:RepositoryApplication.getInstance().newListUserDoctor) {
+                            if (skillDoctor.getSkill().equals(userDoctor1.getDoctorSkill())) {
+                                Log.d("name",skillDoctor.getSkill()+userDoctor1.getDoctorSkill());
+                              // Log.d( RepositoryApplication.getInstance().newListUserDoctor.size());
+                                RepositoryApplication.getInstance().myUserDoctorList.add(userDoctor1);
+                                //Log.d("drList", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
+
+                        }
+
+                            //Log.d("drList", String.valueOf(RepositoryApplication.getInstance().newListUserDoctor.size()));
+                            Log.d("List", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
+                              Intent intent = new Intent(DoctorPageActivity.this, AllergologueActivity.class);
+                              startActivity(intent);
+                        }
+                      //  Log.d("drList", String.valueOf(RepositoryApplication.getInstance().newListUserDoctor.size()));
+
+                      //  Intent intent = new Intent(DoctorPageActivity.this, AllergologueActivity.class);
+                      //  startActivity(intent);
+
+
+                    //Intent intent = new Intent(DoctorPageActivity.this, AllergologueActivity.class);
+                    // startActivity(intent);
+                    Toast.makeText(DoctorPageActivity.this, "Allergo", Toast.LENGTH_SHORT).show();
+                }
+                   /* if(skillDoctor.getSkill()=="Cardiologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Cardiologue", Toast.LENGTH_SHORT).show();
+                    }
+                    if(skillDoctor.getSkill()=="Chirurgien"){
+                        Toast.makeText(DoctorPageActivity.this, "Chirurgien", Toast.LENGTH_SHORT).show();
+                    }
+                    if(skillDoctor.getSkill()=="Dentiste"){
+                        Toast.makeText(DoctorPageActivity.this, "Dentiste", Toast.LENGTH_SHORT).show();
+                    }
+                    if(skillDoctor.getSkill()=="Rhumatologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Rhumatologue", Toast.LENGTH_SHORT).show();
+                    }
+                    if(skillDoctor.getSkill()=="Pediatre"){
+                        Toast.makeText(DoctorPageActivity.this, "Pediatre", Toast.LENGTH_SHORT).show();
+                    }
+                    if(skillDoctor.getSkill()=="Psychiatre"){
+                        Toast.makeText(DoctorPageActivity.this, "Psychiatre", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Neurologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Neurologue", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Generaliste"){
+                        Toast.makeText(DoctorPageActivity.this, "Generaliste", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Ophtalmologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Ophtalmologue", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="ORL"){
+                        Toast.makeText(DoctorPageActivity.this, "ORL", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Radiologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Radiologue", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Gynecologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Gynecologue", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if(skillDoctor.getSkill()=="Dermatologue"){
+                        Toast.makeText(DoctorPageActivity.this, "Dermatologue", Toast.LENGTH_SHORT).show();
+                    }*/
+
+                   /* for(SkillDoctor skillDoctor1 : RepositoryApplication.getInstance().myListSkillsDoctor){
                             if(skillDoctor1.getSkill().equalsIgnoreCase("Allergologue")){
                                 Intent intent = new Intent(DoctorPageActivity.this,AllergologueActivity.class);
                                 startActivity(intent);
                         }
-                    }
+                    }*/
+
+                      /*  for(UserDoctor userDoctor:RepositoryApplication.getInstance().myUserDoctorList){
+                            for(SkillDoctor skillDoctor16:RepositoryApplication.getInstance().myListSkillsDoctor){
+                            if(skillDoctor16.getSkill().equalsIgnoreCase("Allergologue") &&(userDoctor.getDoctorSkill().equalsIgnoreCase("Allergologue"))){
+                                RepositoryApplication.getInstance().listAllergo.add(userDoctor);
+                                Intent intent = new Intent(DoctorPageActivity.this,AllergologueActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }*/
                 }
             };
 
-           /* OnLayoutClickedAction onLayoutClickedAction = new OnLayoutClickedAction() {
-                @Override
-                public void goTOListDoctorsBySkills(UserDoctor userDoctor) {
-                    for(UserDoctor userDoctor1 :RepositoryApplication.getInstance().myUserDoctorList){
-                        if(userDoctor1.getDoctorSkill().equalsIgnoreCase("Allergologue")){
-                            RepositoryApplication.getInstance().listAllergo.add(userDoctor1);
-                        }
-                    }
-                }
-            };*/
+
+
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             pageDoctorsAdapter = new PageDoctorsAdapter(onLayoutClickedAction);
             GridLayoutManager layoutManager = new GridLayoutManager(this, 4);

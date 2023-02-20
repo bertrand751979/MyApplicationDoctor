@@ -5,5 +5,5 @@ import com.example.myapplicationdoctor.model.UserDoctor;
 
 public interface OnLayoutClickedAction {
     void goToListDoctorsBySkills(SkillDoctor skillDoctor);
-    //void goTOListDoctorsBySkills(UserDoctor userDoctor);
+    //void goToListDoctorsBySkills(UserDoctor userDoctor);
 }

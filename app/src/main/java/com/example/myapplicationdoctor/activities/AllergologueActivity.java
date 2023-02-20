@@ -67,7 +67,6 @@ public class AllergologueActivity extends AppCompatActivity {
             @Override
             public void goToDrMapLocation(UserDoctor userDoctor) {
                 Toast.makeText(AllergologueActivity.this, "Map", Toast.LENGTH_SHORT).show();
-
             }
         };
 
@@ -81,21 +80,22 @@ public class AllergologueActivity extends AppCompatActivity {
         };
         allergoAdapter = new AllergologueAdapter(onCircleDetailsClickedAction, onCirclePhoneClickedAction, onCircleMapClickedAction);
         recyclerView.setAdapter(allergoAdapter);
-       /* allergologueActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
-            @Override
-            public void onChanged(List<UserDoctor> userDoctors) {
-                allergoAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
-                RepositoryApplication.getInstance().listAllergo = (ArrayList<UserDoctor>) userDoctors;
-            }
-        });*/
-
-        allergologueActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+        allergologueActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
                 allergoAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
                 RepositoryApplication.getInstance().listAllergo = (ArrayList<UserDoctor>) userDoctors;
             }
         });
-
+        allergologueActivityViewModel.toPostAllergologueList();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+
+
+
 }

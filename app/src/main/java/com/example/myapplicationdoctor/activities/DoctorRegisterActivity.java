@@ -236,8 +236,8 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 userDoctor.setDoctorCloseHolidays(endHolidays.getText().toString());
                 userDoctor.setDoctorOpenOffice(startWorkHour.getText().toString());
                 userDoctor.setDoctorCloseOffice(leaveWorkHour.getText().toString());
-                RepositoryApplication.getInstance().addUserDoctor(userDoctor,DoctorRegisterActivity.this);
-
+                //RepositoryApplication.getInstance().addUserDoctor(userDoctor,DoctorRegisterActivity.this);
+                doctorRegisterActivityViewModel.addToDoctorList(userDoctor,DoctorRegisterActivity.this);
                 Intent intent = new Intent(DoctorRegisterActivity.this,LoginPageActivity.class);
                 intent.putExtra(USERDOCTOR_KEY,userDoctor);
                 startActivity(intent);

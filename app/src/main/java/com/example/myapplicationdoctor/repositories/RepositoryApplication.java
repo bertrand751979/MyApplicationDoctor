@@ -158,4 +158,15 @@ public class RepositoryApplication {
     public LiveData<List<UserDoctor>> getUserDoctorList (Context context){
         return ApplicationDatabaseUserDoctor.getInstance(context).getUserDoctorDao().getUsersDoctor();
     }
+
+    public boolean isSameSkill(String skillSelected){
+        boolean result=  false;
+        for(UserDoctor resultSkill: newListUserDoctor){
+            if(resultSkill.getDoctorSkill().equalsIgnoreCase(skillSelected)){
+                result =true;
+            }
+        }
+        return result;
+    }
+
 }
