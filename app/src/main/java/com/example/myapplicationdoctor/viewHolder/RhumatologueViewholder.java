@@ -3,47 +3,44 @@ package com.example.myapplicationdoctor.viewHolder;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.myapplicationdoctor.OnCircleDetailsClickedAction;
 import com.example.myapplicationdoctor.OnCircleMapClickedAction;
 import com.example.myapplicationdoctor.OnCirclePhoneClickedAction;
 import com.example.myapplicationdoctor.R;
 import com.example.myapplicationdoctor.model.UserDoctor;
 
-public class AllergologueViewHolder extends RecyclerView.ViewHolder {
-    private TextView allergoName;
-    private TextView allergoSkills;
+public class RhumatologueViewholder extends RecyclerView.ViewHolder {
+    private TextView rhumatoName;
+    private TextView rhumatoSkills;
     private ImageView circlePhone;
     private ImageView circlePlace;
     private ImageView circleDetails;
 
-
-    public AllergologueViewHolder(@NonNull View view) {
+    public RhumatologueViewholder(@NonNull View view) {
         super(view);
-        allergoName = view.findViewById(R.id.raw_choice_dr_name);
-        allergoSkills = view.findViewById(R.id.raw_choice_dr_skill);
+        rhumatoName = view.findViewById(R.id.raw_choice_dr_name);
+        rhumatoSkills = view.findViewById(R.id.raw_choice_dr_skill);
         circlePhone = view.findViewById(R.id.raw_choice_dr_circle_phone);
         circlePlace = view.findViewById(R.id.raw_choice_dr_circle_place);
         circleDetails = view.findViewById(R.id.raw_choice_dr_circle_three_points);
     }
 
-    public TextView getAllergoName() {
-        return allergoName;
+    public TextView getRhumatoName() {
+        return rhumatoName;
     }
 
-    public void setAllergoName(TextView allergoName) {
-        this.allergoName = allergoName;
+    public void setRhumatoName(TextView rhumatoName) {
+        this.rhumatoName = rhumatoName;
     }
 
-    public TextView getAllergoSkills() {
-        return allergoSkills;
+    public TextView getRhumatoSkills() {
+        return rhumatoSkills;
     }
 
-    public void setAllergoSkills(TextView allergoSkills) {
-        this.allergoSkills = allergoSkills;
+    public void setRhumatoSkills(TextView rhumatoSkills) {
+        this.rhumatoSkills = rhumatoSkills;
     }
 
     public ImageView getCirclePhone() {
@@ -72,8 +69,8 @@ public class AllergologueViewHolder extends RecyclerView.ViewHolder {
 
     public void bind (UserDoctor userDoctor, OnCircleDetailsClickedAction onCircleDetailsClickedAction,
                       OnCircleMapClickedAction onCircleMapClickedAction, OnCirclePhoneClickedAction onCirclePhoneClickedAction){
-        allergoName.setText(userDoctor.getDoctorName());
-        allergoSkills.setText(userDoctor.getDoctorSkill());
+        rhumatoName.setText(userDoctor.getDoctorName());
+        rhumatoSkills.setText(userDoctor.getDoctorSkill());
         circlePhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

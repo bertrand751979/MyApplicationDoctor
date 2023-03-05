@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.myapplicationdoctor.model.City;
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.model.UserPatient;
 import com.example.myapplicationdoctor.repositories.RepositoryApplication;
@@ -22,5 +23,7 @@ public class RegisterPageActivityViewModel extends ViewModel {
         RepositoryApplication.getInstance().addUserPatient(userPatient, context);
     }
 
+    public void addToSpinnerCityList(City city, Context context){
 
+    }
 }

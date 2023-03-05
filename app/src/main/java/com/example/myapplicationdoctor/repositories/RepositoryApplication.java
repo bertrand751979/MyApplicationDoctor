@@ -2,18 +2,16 @@ package com.example.myapplicationdoctor.repositories;
 
 import android.content.Context;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
 
 import com.example.myapplicationdoctor.ApplicationDatabaseEmergency;
 import com.example.myapplicationdoctor.ApplicationDatabaseSkill;
 import com.example.myapplicationdoctor.ApplicationDatabaseUserDoctor;
 import com.example.myapplicationdoctor.ApplicationDatabaseUserPatient;
-import com.example.myapplicationdoctor.fragments.PopupFirstConnexionAlertDialogFragment;
 import com.example.myapplicationdoctor.model.City;
 import com.example.myapplicationdoctor.model.Emergency;
 import com.example.myapplicationdoctor.model.SkillDoctor;
-import com.example.myapplicationdoctor.model.TestSkill;
+import com.example.myapplicationdoctor.model.MyDrSkillSpinner;
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.model.UserPatient;
 
@@ -25,21 +23,36 @@ public class RepositoryApplication {
     public ArrayList<UserDoctor> myUserDoctorList = new ArrayList<>();
     public ArrayList<UserDoctor> newListUserDoctor = new ArrayList<>();
     public ArrayList<UserPatient> newListUserPatient = new ArrayList<>();
-
+    public ArrayList<UserDoctor> displayListDrSkill = new ArrayList<>();
+    public ArrayList<UserDoctor> searchDrSkillList = new ArrayList<>();
     public ArrayList<UserPatient> myUserPatientList = new ArrayList<>();
     public ArrayList<SkillDoctor> myListSkillsDoctor = new ArrayList<>();
     public ArrayList<Emergency> emergencyList = new ArrayList<>();
-    public ArrayList<TestSkill> skillsDoctorsList = new ArrayList<>();
+    public ArrayList<MyDrSkillSpinner> skillsDoctorsList = new ArrayList<>();
     public ArrayList<City> cityDoctorsList = new ArrayList<>();
     public ArrayList<UserDoctor> listAllergo = new ArrayList<>();
+    public ArrayList<UserDoctor> listRhumato = new ArrayList<>();
+    public ArrayList<City> theCityDoctorsList = new ArrayList<>();
+    public ArrayList<MyDrSkillSpinner> testList = new ArrayList<>();
 
     private RepositoryApplication(){}
+
+
     public static RepositoryApplication INSTANCE = null;
     public static RepositoryApplication getInstance(){
         if(INSTANCE == null){
             INSTANCE = new RepositoryApplication();
         }
         return INSTANCE;
+    }
+
+
+    public ArrayList<UserDoctor> getDisplayListDrSkill() {
+        return displayListDrSkill;
+    }
+
+    public void setDisplayListDrSkill(ArrayList<UserDoctor> displayListDrSkill) {
+        this.displayListDrSkill = displayListDrSkill;
     }
 
     public ArrayList<UserDoctor> getMyUserDoctorList() {
@@ -50,6 +63,14 @@ public class RepositoryApplication {
         this.myUserDoctorList = myUserDoctorList;
     }
 
+    public ArrayList<City> getTheCityDoctorsList() {
+        return theCityDoctorsList;
+    }
+
+    public void setTheCityDoctorsList(ArrayList<City> theCityDoctorsList) {
+        this.theCityDoctorsList = theCityDoctorsList;
+    }
+
     public ArrayList<UserDoctor> getNewListUserDoctor() {
         return newListUserDoctor;
     }
@@ -58,12 +79,20 @@ public class RepositoryApplication {
         this.newListUserDoctor = newListUserDoctor;
     }
 
-    public ArrayList<TestSkill> getSkillsDoctorsList() {
+    public ArrayList<MyDrSkillSpinner> getSkillsDoctorsList() {
         return skillsDoctorsList;
     }
 
-    public void setSkillsDoctorsList(ArrayList<TestSkill> skillsDoctorsList) {
+    public void setSkillsDoctorsList(ArrayList<MyDrSkillSpinner> skillsDoctorsList) {
         this.skillsDoctorsList = skillsDoctorsList;
+    }
+
+    public ArrayList<UserDoctor> getSearchDrSkillList() {
+        return searchDrSkillList;
+    }
+
+    public void setSearchDrSkillList(ArrayList<UserDoctor> searchDrSkillList) {
+        this.searchDrSkillList = searchDrSkillList;
     }
 
     public ArrayList<City> getCityDoctorsList() {
@@ -80,6 +109,14 @@ public class RepositoryApplication {
 
     public void setListAllergo(ArrayList<UserDoctor> listAllergo) {
         this.listAllergo = listAllergo;
+    }
+
+    public ArrayList<MyDrSkillSpinner> getTestList() {
+        return testList;
+    }
+
+    public void setTestList(ArrayList<MyDrSkillSpinner> testList) {
+        this.testList = testList;
     }
 
     public ArrayList<UserPatient> getMyUserPatientList() {
@@ -114,6 +151,14 @@ public class RepositoryApplication {
         this.emergencyList = emergencyList;
     }
 
+    public ArrayList<UserDoctor> getListRhumato() {
+        return listRhumato;
+    }
+
+    public void setListRhumato(ArrayList<UserDoctor> listRhumato) {
+        this.listRhumato = listRhumato;
+    }
+
     public void addUserDoctorSkill(SkillDoctor skillDoctor, Context context){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -141,7 +186,6 @@ public class RepositoryApplication {
         });
     }
 
-
     public void addEmergency(Emergency emergency, Context context){
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
@@ -150,6 +194,7 @@ public class RepositoryApplication {
             }
         });
     }
+
 
     public LiveData<List<UserPatient>> getUserList (Context context){
         return ApplicationDatabaseUserPatient.getInstance(context).getUserPatientDao().getUsersPatient();
@@ -162,11 +207,16 @@ public class RepositoryApplication {
     public boolean isSameSkill(String skillSelected){
         boolean result=  false;
         for(UserDoctor resultSkill: newListUserDoctor){
-            if(resultSkill.getDoctorSkill().equalsIgnoreCase(skillSelected)){
+            if(resultSkill.getDoctorSkill().toLowerCase().contains(skillSelected)){
                 result =true;
+                searchDrSkillList.add(resultSkill);
             }
+
         }
         return result;
     }
+
+
+
 
 }

@@ -17,12 +17,15 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplicationdoctor.R;
+import com.example.myapplicationdoctor.model.MyDrSkillSpinner;
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.model.UserPatient;
 import com.example.myapplicationdoctor.repositories.RepositoryApplication;
+import com.example.myapplicationdoctor.viewModel.DoctorRegisterActivityViewModel;
 import com.example.myapplicationdoctor.viewModel.LoginPageActivityViewModel;
 
 import java.util.ArrayList;
@@ -36,12 +39,18 @@ public class LoginPageActivity extends AppCompatActivity {
         private UserDoctor loginUserDoctor;
         private UserPatient loginUserPatient;
         private LoginPageActivityViewModel loginPageActivityViewModel;
+        private DoctorRegisterActivityViewModel doctorRegisterActivityViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activit_login_page);
+
         loginPageActivityViewModel = new ViewModelProvider(this).get(LoginPageActivityViewModel.class);
+        RepositoryApplication.getInstance().getSkillsDoctorsList();
+        Log.d("Spinner", String.valueOf(RepositoryApplication.getInstance().getMyListSkillsDoctor().size()));
+        Log.d("Spiner", String.valueOf(RepositoryApplication.getInstance().getSkillsDoctorsList().size()));
+
         editLogin = findViewById(R.id.login_page_edit_login_);
         editPassword = findViewById(R.id.login_page_edit_password_);
         btnRegister = findViewById(R.id.login_page_btn_go_to_register);
@@ -60,7 +69,6 @@ public class LoginPageActivity extends AppCompatActivity {
                 checkingEditZone();
                 isRegisterPatient();
                 isRegisterDoctor();
-
             }
         });
 
@@ -70,19 +78,19 @@ public class LoginPageActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.purple_500));
         }
+
         loginPageActivityViewModel.getLiveDataUser(this).observe(this, new Observer<List<UserPatient>>() {
             @Override
             public void onChanged(List<UserPatient> userPatients) {
                 RepositoryApplication.getInstance().newListUserPatient = (ArrayList<UserPatient>) userPatients ;
             }
         });
-
-        loginPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+       /* loginPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
                 RepositoryApplication.getInstance().newListUserDoctor = (ArrayList<UserDoctor>) userDoctors;
             }
-        });
+        });*/
     }
 
     public void checkingEditZone(){
@@ -104,6 +112,7 @@ public class LoginPageActivity extends AppCompatActivity {
                 loginUserPatient =userPatient;
             }
         }
+
         if (resultat == true) {
             Intent intent = new Intent(LoginPageActivity.this, DoctorPageActivity.class);
             intent.putExtra(USERPATIENT_KEY, loginUserPatient);
@@ -125,6 +134,7 @@ public class LoginPageActivity extends AppCompatActivity {
                 loginUserDoctor =userDoctor;
             }
         }
+
         if (resultat == true) {
             Intent intent = new Intent(LoginPageActivity.this, DrRegistryDetailActivity.class);
             intent.putExtra(USERDOCTOR_KEY, loginUserDoctor);
@@ -135,5 +145,7 @@ public class LoginPageActivity extends AppCompatActivity {
             Toast.makeText(LoginPageActivity.this, "Inconnu", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
 }

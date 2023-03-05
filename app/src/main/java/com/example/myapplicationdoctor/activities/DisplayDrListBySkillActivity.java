@@ -18,34 +18,35 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplicationdoctor.InterfaceEditTextDialog;
 import com.example.myapplicationdoctor.OnCircleDetailsClickedAction;
 import com.example.myapplicationdoctor.OnCircleMapClickedAction;
 import com.example.myapplicationdoctor.OnCirclePhoneClickedAction;
 import com.example.myapplicationdoctor.R;
-import com.example.myapplicationdoctor.adapter.AllergologueAdapter;
+import com.example.myapplicationdoctor.adapter.UserDoctorAdapter;
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.repositories.RepositoryApplication;
-import com.example.myapplicationdoctor.viewModel.AllergologueActivityViewModel;
+import com.example.myapplicationdoctor.viewModel.DisplayDrListBySkillActivityViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllergologueActivity extends AppCompatActivity {
+public class DisplayDrListBySkillActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private AllergologueAdapter allergoAdapter;
-    private AllergologueActivityViewModel allergologueActivityViewModel;
+    private UserDoctorAdapter userDoctorAdapter;
+    private DisplayDrListBySkillActivityViewModel displayDrListBySkillActivityViewModel;
+    private InterfaceEditTextDialog interfaceEditTextDialog;
+    private UserDoctor userDoctor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allergo);
-        RepositoryApplication.getInstance().getMyUserDoctorList();
-        //RepositoryApplication.getInstance().getListAllergo();
-        Log.d("Taille2", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
-
-
-        RepositoryApplication.getInstance().listAllergo = RepositoryApplication.getInstance().myUserDoctorList;
-        allergologueActivityViewModel = new ViewModelProvider(this).get(AllergologueActivityViewModel.class);
+        RepositoryApplication.getInstance().getSearchDrSkillList();
+        Log.d("Taille45", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
+        //Log.d("Taille2", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
+        //Log.d("Taille3", String.valueOf(RepositoryApplication.getInstance().displayListDrSkill.size()));
+        displayDrListBySkillActivityViewModel = new ViewModelProvider(this).get(DisplayDrListBySkillActivityViewModel.class);
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -66,36 +67,37 @@ public class AllergologueActivity extends AppCompatActivity {
         OnCircleMapClickedAction onCircleMapClickedAction = new OnCircleMapClickedAction() {
             @Override
             public void goToDrMapLocation(UserDoctor userDoctor) {
-                Toast.makeText(AllergologueActivity.this, "Map", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DisplayDrListBySkillActivity.this, "Map", Toast.LENGTH_SHORT).show();
             }
         };
 
         OnCircleDetailsClickedAction onCircleDetailsClickedAction = new OnCircleDetailsClickedAction() {
             @Override
             public void goToDrDetails(UserDoctor userDoctor) {
-                Intent intent = new Intent(AllergologueActivity.this, DrRegistryDetailActivity.class);
+                Intent intent = new Intent(DisplayDrListBySkillActivity.this, DrRegistryDetailActivity.class);
                 intent.putExtra(USERDOCTOR_KEY,userDoctor);
                 startActivity(intent);
             }
         };
-        allergoAdapter = new AllergologueAdapter(onCircleDetailsClickedAction, onCirclePhoneClickedAction, onCircleMapClickedAction);
-        recyclerView.setAdapter(allergoAdapter);
-        allergologueActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
+
+        userDoctorAdapter = new UserDoctorAdapter(onCircleDetailsClickedAction, onCirclePhoneClickedAction, onCircleMapClickedAction);
+        recyclerView.setAdapter(userDoctorAdapter);
+        displayDrListBySkillActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
-                allergoAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
-                RepositoryApplication.getInstance().listAllergo = (ArrayList<UserDoctor>) userDoctors;
+                userDoctorAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
+                RepositoryApplication.getInstance().searchDrSkillList=(ArrayList<UserDoctor>) userDoctors;
+                Log.d("fin", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
             }
         });
-        allergologueActivityViewModel.toPostAllergologueList();
+        displayDrListBySkillActivityViewModel.toPostAllergologueList();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if(RepositoryApplication.getInstance().searchDrSkillList.size()>0){
+            userDoctorAdapter.notifyDataSetChanged();
+        }
     }
-
-
-
-
 }

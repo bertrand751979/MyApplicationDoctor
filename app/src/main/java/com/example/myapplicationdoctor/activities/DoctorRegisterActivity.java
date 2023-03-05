@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,7 +33,7 @@ import com.example.myapplicationdoctor.DoctorsRetrofitApi;
 import com.example.myapplicationdoctor.R;
 import com.example.myapplicationdoctor.model.City;
 import com.example.myapplicationdoctor.model.Root;
-import com.example.myapplicationdoctor.model.TestSkill;
+import com.example.myapplicationdoctor.model.MyDrSkillSpinner;
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 import com.example.myapplicationdoctor.viewModel.DoctorRegisterActivityViewModel;
@@ -76,9 +77,9 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
     private static final int PICK_PDF_FILE = 2;
     private Uri pickerInitialUri;
     private String skillDr;
-    private String cityDr;
-    private ArrayList<TestSkill> skillsDoctorsList = new ArrayList<>();
+    //private ArrayList<MyDrSkillSpinner> skillsDoctorsList = new ArrayList<>();
     private ArrayList<City> cityDoctorsList = new ArrayList<>();
+    private String cityDr;
     private DoctorRegisterActivityViewModel doctorRegisterActivityViewModel;
     private UserDoctor userDoctor;
 
@@ -109,6 +110,7 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 openFile(pickerInitialUri);
             }
         });
+        
         //drSkills = findViewById(R.id.raw_dr_allergo_skills);
         //drCity = findViewById(R.id.dr_register_holiday_start);
         startWorkHour = findViewById(R.id.dr_register_start);
@@ -142,66 +144,55 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        TestSkill exoSkill1 = new TestSkill("Dermatologue");
-        TestSkill exoSkill2 = new TestSkill("Chirurgien");
-        TestSkill exoSkill3 = new TestSkill("Pédiatre");
-        TestSkill exoSkill4 = new TestSkill("Généraliste");
-        TestSkill exoSkill5 = new TestSkill("Rumathologue");
-        TestSkill exoSkill6= new TestSkill("Cardiologue");
-        TestSkill exoSkill7 = new TestSkill("Ophtalmologue");
-        TestSkill exoSkill8 = new TestSkill("Allergologue");
-        TestSkill exoSkill9 = new TestSkill("Dentiste");
-        TestSkill exoSkill10 = new TestSkill("Gynecologue");
-        TestSkill exoSkill11 = new TestSkill("Radiologue");
-        TestSkill exoSkill12 = new TestSkill("Neurologue");
-        TestSkill exoSkill13 = new TestSkill("Psychiatrie");
+        MyDrSkillSpinner exoSkill1 = new MyDrSkillSpinner("Dermatologue");
+        MyDrSkillSpinner exoSkill2 = new MyDrSkillSpinner("Chirurgien");
+        MyDrSkillSpinner exoSkill3 = new MyDrSkillSpinner("Pédiatre");
+        MyDrSkillSpinner exoSkill4 = new MyDrSkillSpinner("Généraliste");
+        MyDrSkillSpinner exoSkill5 = new MyDrSkillSpinner("Rumathologue");
+        MyDrSkillSpinner exoSkill6= new MyDrSkillSpinner("Cardiologue");
+        MyDrSkillSpinner exoSkill7 = new MyDrSkillSpinner("Ophtalmologue");
+        MyDrSkillSpinner exoSkill8 = new MyDrSkillSpinner("Allergologue");
+        MyDrSkillSpinner exoSkill9 = new MyDrSkillSpinner("Dentiste");
+        MyDrSkillSpinner exoSkill10 = new MyDrSkillSpinner("Gynecologue");
+        MyDrSkillSpinner exoSkill11 = new MyDrSkillSpinner("Radiologue");
+        MyDrSkillSpinner exoSkill12 = new MyDrSkillSpinner("Neurologue");
+        MyDrSkillSpinner exoSkill13 = new MyDrSkillSpinner("Psychiatrie");
+        MyDrSkillSpinner exoSkill14 = new MyDrSkillSpinner("Orl");
+
         RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill1);
-        skillsDoctorsList.add(exoSkill2);
-        skillsDoctorsList.add(exoSkill3);
-        skillsDoctorsList.add(exoSkill4);
-        skillsDoctorsList.add(exoSkill5);
-        skillsDoctorsList.add(exoSkill6);
-        skillsDoctorsList.add(exoSkill7);
-        skillsDoctorsList.add(exoSkill8);
-        skillsDoctorsList.add(exoSkill9);
-        skillsDoctorsList.add(exoSkill10);
-        skillsDoctorsList.add(exoSkill11);
-        skillsDoctorsList.add(exoSkill12);
-        skillsDoctorsList.add(exoSkill13);
-
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill2);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill3);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill4);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill5);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill6);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill7);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill8);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill9);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill10);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill11);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill12);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill13);
+        RepositoryApplication.getInstance().skillsDoctorsList.add(exoSkill14);
+        Log.d("Result", String.valueOf(RepositoryApplication.getInstance().skillsDoctorsList.size()));
         City city1 = new City("Tlemecen");
-        cityDoctorsList.add(city1);
+        RepositoryApplication.getInstance().theCityDoctorsList.add(city1);
 
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.skills, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);*/
-        /* ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.country, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);*/
-
-        ArrayAdapter<TestSkill> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,skillsDoctorsList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<MyDrSkillSpinner> adapter4 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,RepositoryApplication.getInstance().skillsDoctorsList);
+        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter4);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Adapter adapter = adapterView.getAdapter();
-                TestSkill testSkill = (TestSkill) adapter.getItem(i);
-                skillDr = testSkill.getDrSkill();
-               /* UserDoctor userDoctor = new UserDoctor();
-                userDoctor.setDoctorSkill(skillDr);
-                Log.d("Skills",userDoctor.getDoctorSkill());*/
+                MyDrSkillSpinner myDrSkillSpinner = (MyDrSkillSpinner) adapter.getItem(i);
+                skillDr = myDrSkillSpinner.getDrSkill();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
-        ArrayAdapter<City> adapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,cityDoctorsList);
+        ArrayAdapter<City> adapter2 = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,RepositoryApplication.getInstance().theCityDoctorsList);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -210,14 +201,9 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 Adapter adapter = adapterView.getAdapter();
                 City city = (City) adapter.getItem(i);
                 cityDr = city.getCityName();
-               /* UserDoctor userDoctor = new UserDoctor();
-                userDoctor.setDoctorCity(cityDr);
-                Log.d("City",userDoctor.getDoctorCity());*/
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -243,15 +229,15 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 startActivity(intent);
             }
         });
+
         doctorRegisterActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
                 RepositoryApplication.getInstance().myUserDoctorList = (ArrayList<UserDoctor>) userDoctors;
-                Toast.makeText(DoctorRegisterActivity.this, "Long"+RepositoryApplication.getInstance().myUserDoctorList.size(), Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(DoctorRegisterActivity.this, "Long"+RepositoryApplication.getInstance().myUserDoctorList.size(), Toast.LENGTH_SHORT).show();
+                Log.d("Long", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
             }
         });
-
     }
 
     @Override
@@ -261,8 +247,8 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
+
     public void callService() {
         DoctorsRetrofitApi.DoctorsRetrofitService service = DoctorsRetrofitApi.getInstance().getClient().create(DoctorsRetrofitApi.DoctorsRetrofitService.class);
         Call<Root> call = service.getRoot(48.8306,"distance",false,"MMyATu4yTWIwaE1cuQ1HPUL6IsaGBKdC","paris");
@@ -274,18 +260,15 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 }
                 Toast.makeText(DoctorRegisterActivity.this, "CONNEXION OK", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onFailure(Call<Root> call, Throwable t) {
                 Toast.makeText(DoctorRegisterActivity.this, "Failure", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
 
     private void processResponse(Response<Root> response) {
         if(response.body().getResults().size()>0){
-
         }
     }
 
@@ -325,7 +308,6 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
         timePickerDialog.show();
     }
 
-
     public void popDatePickerStartHoliday(){
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -348,8 +330,6 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 closeMonthHoliday = selectedMonth;
                 closetDayHoliday = selectedDay;
                 endHolidays.setText(String.format(Locale.getDefault(),"Le " + closetDayHoliday + " - " +(closeMonthHoliday+1) + "- " +closeYearHoliday));
-
-
                 //userDoctor.setDoctorCloseHolidays(endHolidays.getText().toString());
                 //userDoctor.setDoctorCloseHolidays(String.format(Locale.getDefault(),"Le " + closetDayHoliday + " - " +(closeMonthHoliday+1) + "- " +closeYearHoliday));
             }

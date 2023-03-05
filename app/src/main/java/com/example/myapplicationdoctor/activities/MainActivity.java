@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.myapplicationdoctor.R;
+import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 
 public class MainActivity extends AppCompatActivity {
     public static String USERPATIENT_KEY ="user_patient_key";
@@ -16,5 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

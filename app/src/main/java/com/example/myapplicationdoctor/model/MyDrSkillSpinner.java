@@ -2,10 +2,10 @@ package com.example.myapplicationdoctor.model;
 
 import java.io.Serializable;
 
-public class TestSkill implements Serializable {
+public class MyDrSkillSpinner implements Serializable {
     private String drSkill;
 
-    public TestSkill(String drSkill) {
+    public MyDrSkillSpinner(String drSkill) {
         this.drSkill = drSkill;
     }
 

@@ -3,6 +3,7 @@ package com.example.myapplicationdoctor.activities;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplicationdoctor.R;
+import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 
 public class StartPageActivity extends AppCompatActivity {
     private Button btnStart;
@@ -20,6 +22,10 @@ public class StartPageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_page);
+
+
+
+
         btnStart = findViewById(R.id.btn_start_page);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override

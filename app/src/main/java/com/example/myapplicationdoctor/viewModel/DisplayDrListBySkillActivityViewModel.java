@@ -13,15 +13,17 @@ import com.example.myapplicationdoctor.repositories.RepositoryApplication;
 
 import java.util.List;
 
-public class AllergologueActivityViewModel extends ViewModel {
+public class DisplayDrListBySkillActivityViewModel extends ViewModel {
     private MutableLiveData<List<UserDoctor>> listChoiceDrSkillMutable = new MutableLiveData<>();
     public LiveData<List<UserDoctor>> liveDataChoiceDrSkill = listChoiceDrSkillMutable;
 
-   /* public LiveData<List<UserDoctor>> getLiveDataDoctor(Context context){
+    public LiveData<List<UserDoctor>> getLiveDataDoctor(Context context){
         return RepositoryApplication.getInstance().getUserDoctorList(context);
-    }*/
+    }
     public void toPostAllergologueList(){
-        listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().myUserDoctorList);
+        listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().searchDrSkillList);
+        //listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().displayListDrSkill);
+
     }
 
 }

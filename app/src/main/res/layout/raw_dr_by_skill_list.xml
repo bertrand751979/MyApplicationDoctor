@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
        <TextView
+           android:id="@+id/raw_search_dr_name"
            android:layout_width="140dp"
            android:layout_height="wrap_content"
            android:text="Dr BEKHTI Ennouar"
@@ -28,7 +29,7 @@
             android:layout_marginLeft="30dp"/>
 
         <TextView
-            android:id="@+id/raw_searchlist_dr_city"
+            android:id="@+id/raw_search_dr_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -50,7 +51,7 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/raw_searchlist_dr_openHour"
+            android:id="@+id/raw_search_dr_openHour"
             android:layout_width="40dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -68,7 +69,7 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/raw_searchlist_dr_closeHour"
+            android:id="@+id/raw_search_dr_closeHour"
             android:layout_width="40dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
@@ -78,7 +79,7 @@
 
 
         <TextView
-            android:id="@+id/raw_searchlist_dr_skill"
+            android:id="@+id/raw_search_dr_skill"
             android:layout_width="120dp"
             android:layout_gravity="center"
             android:textAlignment="center"
@@ -91,7 +92,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/raw_searchlist_btn_go_to_detail"
+        android:id="@+id/raw_search_btn_go_to_detail"
         android:layout_width="127dp"
         android:layout_height="40dp"
         android:text="view contact"

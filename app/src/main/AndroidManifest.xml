@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplicationdoctor">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -43,7 +42,7 @@
             android:name=".activities.DoctorRegisterActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activities.AllergologueActivity"
+            android:name=".activities.DisplayDrListBySkillActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".activities.DoctorPageActivity"
@@ -51,9 +50,8 @@
         <activity
             android:name=".activities.EmergencyActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity
-            android:name=".activities.SearchActivity"
+            android:name=".activities.SearchingPageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".activities.DrRegistryDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

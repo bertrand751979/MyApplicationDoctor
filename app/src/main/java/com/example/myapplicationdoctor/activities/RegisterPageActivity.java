@@ -82,6 +82,7 @@ public class RegisterPageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(RegisterPageActivity.this,DoctorRegisterActivity.class);
                 startActivity(intent);
+                RepositoryApplication.getInstance().getMyListSkillsDoctor();
             }
         });
 

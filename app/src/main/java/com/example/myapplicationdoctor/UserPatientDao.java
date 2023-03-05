@@ -6,6 +6,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.model.UserPatient;
@@ -22,7 +23,11 @@ public interface UserPatientDao {
     @Insert
     void add(UserPatient userPatient);
 
+  /*  @Delete
+    void delete(Worker worker);
 
+    @Update
+    void update(Worker worker);*/
 
 
 
