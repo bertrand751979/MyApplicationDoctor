@@ -1,5 +1,6 @@
 package com.example.myapplicationdoctor.activities;
 
+import static com.example.myapplicationdoctor.activities.DoctorPageActivity.choice;
 import static com.example.myapplicationdoctor.activities.MainActivity.USERDOCTOR_KEY;
 
 import android.content.Intent;
@@ -35,17 +36,13 @@ public class DisplayDrListBySkillActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UserDoctorAdapter userDoctorAdapter;
     private DisplayDrListBySkillActivityViewModel displayDrListBySkillActivityViewModel;
-    private InterfaceEditTextDialog interfaceEditTextDialog;
-    private UserDoctor userDoctor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allergo);
-        RepositoryApplication.getInstance().getSearchDrSkillList();
-        Log.d("Taille45", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
-        //Log.d("Taille2", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
-        //Log.d("Taille3", String.valueOf(RepositoryApplication.getInstance().displayListDrSkill.size()));
+        Log.d("Sort", String.valueOf(RepositoryApplication.getInstance().listSortSkill.size()));
+
         displayDrListBySkillActivityViewModel = new ViewModelProvider(this).get(DisplayDrListBySkillActivityViewModel.class);
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -75,29 +72,42 @@ public class DisplayDrListBySkillActivity extends AppCompatActivity {
             @Override
             public void goToDrDetails(UserDoctor userDoctor) {
                 Intent intent = new Intent(DisplayDrListBySkillActivity.this, DrRegistryDetailActivity.class);
-                intent.putExtra(USERDOCTOR_KEY,userDoctor);
+                intent.putExtra(USERDOCTOR_KEY, userDoctor);
                 startActivity(intent);
             }
         };
 
+        RepositoryApplication.getInstance().listSortSkill=RepositoryApplication.getInstance().myDrSkillSearch;
+        Log.d("listSize", String.valueOf(RepositoryApplication.getInstance().listSortSkill.size()));
         userDoctorAdapter = new UserDoctorAdapter(onCircleDetailsClickedAction, onCirclePhoneClickedAction, onCircleMapClickedAction);
+
         recyclerView.setAdapter(userDoctorAdapter);
-        displayDrListBySkillActivityViewModel.liveDataChoiceDrSkill.observe(this, new Observer<List<UserDoctor>>() {
+        displayDrListBySkillActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
-                userDoctorAdapter.setListUserDoctorAdapter(new ArrayList<>(userDoctors));
-                RepositoryApplication.getInstance().searchDrSkillList=(ArrayList<UserDoctor>) userDoctors;
-                Log.d("fin", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
+                RepositoryApplication.getInstance().listSortSkill = (ArrayList<UserDoctor>) userDoctors;
+                userDoctorAdapter.setListUserDoctorAdapter(sortMySkillList());
+                Log.d("choice", String.valueOf(choice));
             }
         });
-        displayDrListBySkillActivityViewModel.toPostAllergologueList();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(RepositoryApplication.getInstance().searchDrSkillList.size()>0){
-            userDoctorAdapter.notifyDataSetChanged();
-        }
+        RepositoryApplication.getInstance().myDrSkillSearch.clear();
+        userDoctorAdapter.setListUserDoctorAdapter(RepositoryApplication.getInstance().listSortSkill);
     }
+
+    private ArrayList<UserDoctor> sortMySkillList(){
+        for(UserDoctor userDoctor:RepositoryApplication.getInstance().listSortSkill) {
+            if(userDoctor.getDoctorSkill().contains(choice)){
+                RepositoryApplication.getInstance().myDrSkillSearch.add(userDoctor);
+                Log.d("list", String.valueOf(RepositoryApplication.getInstance().myDrSkillSearch.size()));
+            }
+        }
+        return RepositoryApplication.getInstance().myDrSkillSearch;
+    }
+
+
 }

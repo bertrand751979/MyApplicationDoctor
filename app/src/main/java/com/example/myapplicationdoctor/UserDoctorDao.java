@@ -20,9 +20,9 @@ public interface UserDoctorDao {
 
     @Insert
     void addDr(UserDoctor userDoctor);
-  /*  @Delete
-    void deletePatient(UserPatient userPatient);
 
     @Update
-    void updatePatient(UserPatient userPatient);*/
+    void userDoctorUpdate(UserDoctor userDoctor);
+
+
 }

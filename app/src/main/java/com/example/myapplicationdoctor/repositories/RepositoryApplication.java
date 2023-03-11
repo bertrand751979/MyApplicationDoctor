@@ -30,10 +30,12 @@ public class RepositoryApplication {
     public ArrayList<Emergency> emergencyList = new ArrayList<>();
     public ArrayList<MyDrSkillSpinner> skillsDoctorsList = new ArrayList<>();
     public ArrayList<City> cityDoctorsList = new ArrayList<>();
-    public ArrayList<UserDoctor> listAllergo = new ArrayList<>();
-    public ArrayList<UserDoctor> listRhumato = new ArrayList<>();
+    public ArrayList<UserDoctor> listSortSkill = new ArrayList<>();
+    public ArrayList<UserDoctor> sortListToDisplay = new ArrayList<>();
     public ArrayList<City> theCityDoctorsList = new ArrayList<>();
     public ArrayList<MyDrSkillSpinner> testList = new ArrayList<>();
+    public ArrayList<UserDoctor> myDrSkillSearch = new ArrayList<>();
+
 
     private RepositoryApplication(){}
 
@@ -46,6 +48,13 @@ public class RepositoryApplication {
         return INSTANCE;
     }
 
+    public ArrayList<UserDoctor> getMyDrSkillSearch() {
+        return myDrSkillSearch;
+    }
+
+    public void setMyDrSkillSearch(ArrayList<UserDoctor> myDrSkillSearch) {
+        this.myDrSkillSearch = myDrSkillSearch;
+    }
 
     public ArrayList<UserDoctor> getDisplayListDrSkill() {
         return displayListDrSkill;
@@ -103,12 +112,12 @@ public class RepositoryApplication {
         this.cityDoctorsList = cityDoctorsList;
     }
 
-    public ArrayList<UserDoctor> getListAllergo() {
-        return listAllergo;
+    public ArrayList<UserDoctor> getListSortSkill() {
+        return listSortSkill;
     }
 
-    public void setListAllergo(ArrayList<UserDoctor> listAllergo) {
-        this.listAllergo = listAllergo;
+    public void setListSortSkill(ArrayList<UserDoctor> listSortSkill) {
+        this.listSortSkill = listSortSkill;
     }
 
     public ArrayList<MyDrSkillSpinner> getTestList() {
@@ -151,12 +160,12 @@ public class RepositoryApplication {
         this.emergencyList = emergencyList;
     }
 
-    public ArrayList<UserDoctor> getListRhumato() {
-        return listRhumato;
+    public ArrayList<UserDoctor> getSortListToDisplay() {
+        return sortListToDisplay;
     }
 
-    public void setListRhumato(ArrayList<UserDoctor> listRhumato) {
-        this.listRhumato = listRhumato;
+    public void setSortListToDisplay(ArrayList<UserDoctor> sortListToDisplay) {
+        this.sortListToDisplay = sortListToDisplay;
     }
 
     public void addUserDoctorSkill(SkillDoctor skillDoctor, Context context){
@@ -217,6 +226,22 @@ public class RepositoryApplication {
     }
 
 
-
-
+    public void updateDoctors(UserDoctor userDoctor , Context context){
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                ApplicationDatabaseUserDoctor.getInstance(context).getUserDoctorDao().userDoctorUpdate(userDoctor);
+            }
+        });
+    }
+    public boolean choiceSkill(String skillSearch,ArrayList<UserDoctor>list) {
+        boolean res = false;
+        for (UserDoctor userDoctor : list) {
+            if (userDoctor.getDoctorSkill().toLowerCase().contains(skillSearch)) {
+                res = true;
+                list.add(userDoctor);
+            }
+        }
+        return res;
+    }
 }

@@ -20,8 +20,10 @@ public class DisplayDrListBySkillActivityViewModel extends ViewModel {
     public LiveData<List<UserDoctor>> getLiveDataDoctor(Context context){
         return RepositoryApplication.getInstance().getUserDoctorList(context);
     }
-    public void toPostAllergologueList(){
-        listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().searchDrSkillList);
+    public void toPostList(){
+        listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().listSortSkill);
+        //listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().searchDrSkillList);
+        //listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().listAllergo);
         //listChoiceDrSkillMutable.postValue(RepositoryApplication.getInstance().displayListDrSkill);
 
     }

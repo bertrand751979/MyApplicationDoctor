@@ -10,7 +10,7 @@ import com.example.myapplicationdoctor.model.UserDoctor;
 import com.example.myapplicationdoctor.model.UserPatient;
 
 
-@Database(entities = {UserPatient.class},version = 2)
+@Database(entities = {UserPatient.class},version = 3)
 public abstract class ApplicationDatabaseUserPatient extends RoomDatabase {
     private static ApplicationDatabaseUserPatient INSTANCE;
     public abstract UserPatientDao getUserPatientDao();

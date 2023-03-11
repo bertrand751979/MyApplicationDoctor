@@ -23,11 +23,7 @@ public interface UserPatientDao {
     @Insert
     void add(UserPatient userPatient);
 
-  /*  @Delete
-    void delete(Worker worker);
 
-    @Update
-    void update(Worker worker);*/
 
 
 

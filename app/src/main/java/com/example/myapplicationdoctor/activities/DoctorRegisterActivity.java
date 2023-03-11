@@ -148,7 +148,7 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
         MyDrSkillSpinner exoSkill2 = new MyDrSkillSpinner("Chirurgien");
         MyDrSkillSpinner exoSkill3 = new MyDrSkillSpinner("Pédiatre");
         MyDrSkillSpinner exoSkill4 = new MyDrSkillSpinner("Généraliste");
-        MyDrSkillSpinner exoSkill5 = new MyDrSkillSpinner("Rumathologue");
+        MyDrSkillSpinner exoSkill5 = new MyDrSkillSpinner("Rhumatologue");
         MyDrSkillSpinner exoSkill6= new MyDrSkillSpinner("Cardiologue");
         MyDrSkillSpinner exoSkill7 = new MyDrSkillSpinner("Ophtalmologue");
         MyDrSkillSpinner exoSkill8 = new MyDrSkillSpinner("Allergologue");
@@ -222,8 +222,8 @@ public class DoctorRegisterActivity extends AppCompatActivity implements Adapter
                 userDoctor.setDoctorCloseHolidays(endHolidays.getText().toString());
                 userDoctor.setDoctorOpenOffice(startWorkHour.getText().toString());
                 userDoctor.setDoctorCloseOffice(leaveWorkHour.getText().toString());
-                //RepositoryApplication.getInstance().addUserDoctor(userDoctor,DoctorRegisterActivity.this);
-                doctorRegisterActivityViewModel.addToDoctorList(userDoctor,DoctorRegisterActivity.this);
+                RepositoryApplication.getInstance().addUserDoctor(userDoctor,DoctorRegisterActivity.this);
+
                 Intent intent = new Intent(DoctorRegisterActivity.this,LoginPageActivity.class);
                 intent.putExtra(USERDOCTOR_KEY,userDoctor);
                 startActivity(intent);

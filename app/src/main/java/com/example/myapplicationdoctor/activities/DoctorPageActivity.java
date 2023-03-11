@@ -33,6 +33,7 @@ import com.example.myapplicationdoctor.OnLayoutClickedAction;
 import com.example.myapplicationdoctor.R;
 import com.example.myapplicationdoctor.fragments.PopupFirstConnexionAlertDialogFragment;
 import com.example.myapplicationdoctor.model.UserDoctor;
+import com.example.myapplicationdoctor.viewModel.DoctorsPageActivityViewModel;
 import com.example.myapplicationdoctor.viewModel.SkillsDoctorViewModel;
 import com.example.myapplicationdoctor.adapter.PageDoctorsAdapter;
 import com.example.myapplicationdoctor.model.SkillDoctor;
@@ -57,27 +58,25 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
     private TextView navHeaderName;
     private SharedPreferences sharedPreferences;
     private ArrayList<SkillDoctor> skillList = new ArrayList<>();
-
+    private DoctorsPageActivityViewModel doctorsPageActivityViewModel;
+    public static String choice;
+    private View view;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors_page);
-        //RepositoryApplication.getInstance().getMyUserDoctorList();
-        RepositoryApplication.getInstance().getMyListSkillsDoctor().clear();
+        doctorsPageActivityViewModel = new ViewModelProvider(this).get(DoctorsPageActivityViewModel.class);
+        skillsDoctorViewModel = new ViewModelProvider(this).get(SkillsDoctorViewModel.class);
 
-        Log.d("Doctors", String.valueOf(RepositoryApplication.getInstance().newListUserDoctor.size()));
+        RepositoryApplication.getInstance().getMyListSkillsDoctor().clear();
+        RepositoryApplication.getInstance().getMyUserDoctorList();
         userPatient = (UserPatient) getIntent().getSerializableExtra(USERPATIENT_KEY);
 
-        //RepositoryApplication.getInstance().getMyUserDoctorList();
-        sharedPreferences = getSharedPreferences(USERPATIENT_KEY, 0);
-        boolean dialogShown = sharedPreferences.getBoolean("dialogShown", false);
-        if (dialogShown != true) {
-            showPopUp();
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("dialogShown", true);
-            editor.commit();
-        }
+        Log.d("Doctors", String.valueOf(RepositoryApplication.getInstance().getNewListUserDoctor().size()));
+        Log.d("Doctors", String.valueOf(RepositoryApplication.getInstance().getMyUserDoctorList().size()));
+        toDisplayBarColor();
+        toShowPupForFirstTime();
 
         Toast.makeText(this, "" + userPatient.getUserPatientName(), Toast.LENGTH_SHORT).show();
         navHeaderName = findViewById(R.id.nav_header_name_id);
@@ -94,83 +93,30 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
                 drawerLayout.open();
             }
         });
-
-        skillsDoctorViewModel = new ViewModelProvider(this).get(SkillsDoctorViewModel.class);
-        SkillDoctor skillDoctor1 = new SkillDoctor("Allergologue");
-        SkillDoctor skillDoctor2 = new SkillDoctor("Cardiologue");
-        SkillDoctor skillDoctor3 = new SkillDoctor("Chirurgien");
-        SkillDoctor skillDoctor4 = new SkillDoctor("Dentiste");
-        SkillDoctor skillDoctor5 = new SkillDoctor("Rhumatologue");
-        SkillDoctor skillDoctor6 = new SkillDoctor("Pediatre");
-        SkillDoctor skillDoctor7 = new SkillDoctor("Psychiatre");
-        SkillDoctor skillDoctor8 = new SkillDoctor("Neurologue");
-        SkillDoctor skillDoctor9 = new SkillDoctor("Generaliste");
-        SkillDoctor skillDoctor10 = new SkillDoctor("Ophtalmologue");
-        SkillDoctor skillDoctor11 = new SkillDoctor("ORL");
-        SkillDoctor skillDoctor12 = new SkillDoctor("Radiologue");
-        //SkillDoctor skillDoctor15 = new SkillDoctor("");
-        SkillDoctor skillDoctor13 = new SkillDoctor("Gynecologue");
-        SkillDoctor skillDoctor14 = new SkillDoctor("Dermatologue");
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor1);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor2);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor3);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor4);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor5);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor6);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor7);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor8);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor9);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor10);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor11);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor12);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor13);
-        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor14);
-
-        Log.d("Sk", String.valueOf(RepositoryApplication.getInstance().myListSkillsDoctor.size()));
-
-
-        // RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor15);
-
-
-       /* RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor1, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor2, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor3, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor4, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor5, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor6, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor7, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor8, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor9, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor10, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor11, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor12, this);
-        //RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor15, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor13, this);
-        RepositoryApplication.getInstance().addUserDoctorSkill(skillDoctor14, this);*/
-
-
-
+        toCreateTableDrBySkill();
+        doctorsPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+            @Override
+            public void onChanged(List<UserDoctor> userDoctors) {
+                RepositoryApplication.getInstance().searchDrSkillList=(ArrayList<UserDoctor>) userDoctors;
+                Log.d("search", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
+            }
+        });
         OnLayoutClickedAction onLayoutClickedAction = new OnLayoutClickedAction() {
             @Override
             public void goToListDoctorsBySkills(SkillDoctor skillDoctor) {
-                for(UserDoctor userDoctor:RepositoryApplication.getInstance().newListUserDoctor){
-                    if(userDoctor.getDoctorSkill().equalsIgnoreCase(skillDoctor.getSkill())){
-                        RepositoryApplication.getInstance().searchDrSkillList.add(userDoctor);
-                        Log.d("diff", String.valueOf(RepositoryApplication.getInstance().searchDrSkillList.size()));
-                    }
-
-                }
+                if (skillDoctor!=null) {
+                    choice=skillDoctor.getSkill();
+               }
                 Intent intent = new Intent(DoctorPageActivity.this, DisplayDrListBySkillActivity.class);
                 startActivity(intent);
             }
         };
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         pageDoctorsAdapter = new PageDoctorsAdapter(onLayoutClickedAction);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(pageDoctorsAdapter);
+
         skillsDoctorViewModel.liveDataDrSkill.observe(this, new Observer<List<SkillDoctor>>() {
             @Override
             public void onChanged(List<SkillDoctor> skillDoctors) {
@@ -178,22 +124,18 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
             }
         });
         skillsDoctorViewModel.toPostMyDrSkill();
-
-        if (Build.VERSION.SDK_INT >= 21) {
-            Window window = this.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(this.getResources().getColor(R.color.purple_500));
-        }
-        //skillList = RepositoryApplication.getInstance().getMyListSkillsDoctor();
+        doctorsPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+            @Override
+            public void onChanged(List<UserDoctor> userDoctors) {
+                RepositoryApplication.getInstance().listSortSkill= (ArrayList<UserDoctor>) userDoctors;
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        RepositoryApplication.getInstance().getSearchDrSkillList().clear();
-
-        //Log.d("Doctor", String.valueOf(RepositoryApplication.getInstance().myUserDoctorList.size()));
+        RepositoryApplication.getInstance().sortListToDisplay.clear();
     }
 
     @Override
@@ -230,5 +172,54 @@ public class DoctorPageActivity extends AppCompatActivity implements NavigationV
         alertDialogFragment.show(fmo, "fragment_alert");
     }
 
+    private void toShowPupForFirstTime(){
+        sharedPreferences = getSharedPreferences(USERPATIENT_KEY, 0);
+        boolean dialogShown = sharedPreferences.getBoolean("dialogShown", false);
+        if (dialogShown != true) {
+            showPopUp();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("dialogShown", true);
+            editor.commit();
+        }
+    }
 
+    public void toDisplayBarColor(){
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.purple_500));
+        }
+    }
+
+    public void toCreateTableDrBySkill(){
+        SkillDoctor skillDoctor1 = new SkillDoctor("Allergologue");
+        SkillDoctor skillDoctor2 = new SkillDoctor("Cardiologue");
+        SkillDoctor skillDoctor3 = new SkillDoctor("Chirurgien");
+        SkillDoctor skillDoctor4 = new SkillDoctor("Dentiste");
+        SkillDoctor skillDoctor5 = new SkillDoctor("Rhumatologue");
+        SkillDoctor skillDoctor6 = new SkillDoctor("Pédiatre");
+        SkillDoctor skillDoctor7 = new SkillDoctor("Psychiatre");
+        SkillDoctor skillDoctor8 = new SkillDoctor("Neurologue");
+        SkillDoctor skillDoctor9 = new SkillDoctor("Généraliste");
+        SkillDoctor skillDoctor10 = new SkillDoctor("Ophtalmologue");
+        SkillDoctor skillDoctor11 = new SkillDoctor("ORL");
+        SkillDoctor skillDoctor12 = new SkillDoctor("Radiologue");
+        SkillDoctor skillDoctor13 = new SkillDoctor("Gynecologue");
+        SkillDoctor skillDoctor14 = new SkillDoctor("Dermatologue");
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor1);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor2);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor3);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor4);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor5);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor6);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor7);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor8);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor9);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor10);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor11);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor12);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor13);
+        RepositoryApplication.getInstance().myListSkillsDoctor.add(skillDoctor14);
+    }
 }

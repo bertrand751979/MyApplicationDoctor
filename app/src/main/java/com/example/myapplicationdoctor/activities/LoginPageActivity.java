@@ -85,12 +85,12 @@ public class LoginPageActivity extends AppCompatActivity {
                 RepositoryApplication.getInstance().newListUserPatient = (ArrayList<UserPatient>) userPatients ;
             }
         });
-       /* loginPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
+        loginPageActivityViewModel.getLiveDataDoctor(this).observe(this, new Observer<List<UserDoctor>>() {
             @Override
             public void onChanged(List<UserDoctor> userDoctors) {
                 RepositoryApplication.getInstance().newListUserDoctor = (ArrayList<UserDoctor>) userDoctors;
             }
-        });*/
+        });
     }
 
     public void checkingEditZone(){

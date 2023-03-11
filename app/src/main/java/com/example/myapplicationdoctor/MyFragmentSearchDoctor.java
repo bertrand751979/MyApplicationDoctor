@@ -40,14 +40,11 @@ public class MyFragmentSearchDoctor extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get field from view
         done =view.findViewById(R.id.btnValidez);
         cancel =view.findViewById(R.id.btnAnnulez);
         mEditText = (EditText) view.findViewById(R.id.txt_your_search);
-        // Fetch arguments from bundle and set title
         String title = getArguments().getString("title", "Enter Name");
         getDialog().setTitle(title);
-        // Show soft keyboard automatically and request focus to field
         mEditText.requestFocus();
         getDialog().getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -75,7 +72,6 @@ public class MyFragmentSearchDoctor extends DialogFragment {
         return frag;
     }
 
-    //je cree le setter de l'interface dont j'ai besoin
     public void setInterfaceEditTextDialog(InterfaceEditTextDialog interfaceEditTextDialog) {
         this.interfaceEditTextDialog = interfaceEditTextDialog;
     }
